@@ -1,0 +1,60 @@
+*chroma.txt*	For Vim version 7.3	Last change: 2012-08-02
+
+
+			VIM REFERENCE MANUAL	by Barry Arthur
+
+
+Help on using chroma                                                    *chroma*
+
+1. Introduction					|chroma-intro|
+
+==============================================================================
+ 1. INTRODUCTION                                                  *chroma-intro*
+
+Chroma is an extensible, markup based colour (:echo) printer for Vim. It uses a
+simple tag markup similar to common lightweight text markup tools, like
+markdown, asciidoc and restructured text.
+
+Chroma provides three mechanisms to generate coloured printing:
+
+1. a g:chroma object with a print(msg) method
+2. a :Chroma command that accesses the g:chroma object
+3. a Chroma() object factory for generating custom chroma objects
+
+The set of built-in tags and their corresponding |highlight-groups| are:
+
+! text !	Error
+* text *	WarningMsg
++ text +	Type
+/ text /	Keyword
+_ text _	Label
+
+The public API of the Chroma class is:
+                                                                *chroma.print()*
+print(msg)		Command to colour print the given marked-up msg
+>
+  call chroma.print("!Error!: You /can't/ do _that_ on +television+!")
+<
+
+                                                                  *chroma.add()*
+add(tag, highlight)	Allow text marked up as <tag>text<tag> to be
+			highlighted with the given group
+>
+  call chroma.add('@', 'ModeMsg')
+  call chroma.print("!Error!: @You@ /can't/ do _that_ on +television+!")
+<
+
+                                                                  *chroma.del()*
+del(tag)		Prevent text marked up as <tag>text<tag> from
+			being coloured
+>
+  call chroma.del('@')
+  call chroma.print("!Error!: @You@ /can't/ do *that* on +television+!")
+<
+Now prints:   @You@   instead of 'You' in colour.
+
+                                                                  *chroma.set()*
+set(tag, highlight)	An alias for add(tag, highlight)
+
+
+ vim:tw=78:ts=8:ft=help:norl:
