@@ -1,4 +1,4 @@
-*chroma.txt*	For Vim version 7.3	Last change: 2012-08-02
+*chroma.txt*	Plugin for easier colour messages using :echo
 
 
 			VIM REFERENCE MANUAL	by Barry Arthur
